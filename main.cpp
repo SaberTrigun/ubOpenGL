@@ -2,7 +2,7 @@
 #include "include/glad/glad.h"
 #include "include/GLFW/glfw3.h"
 #include "class/shader.h"
-#include "class/camera.h"
+//#include "class/camera.h"
 
 int gHeight_scr = 1400;
 int gWidth_scr  = 800;
@@ -32,9 +32,38 @@ int main(){
         return -1;
     }
 
+    float vertices[] = {
+        -0.5f,-0.5f, 0.0f,
+         0.5f,-0.5f, 0.0f,
+         0.0f, 0.5f, 0.0f
+    };
 
 
-    UB::Shader shader("vshade", UB::VERTEX);
+    UB::Shader vxShader("shaders/one/vxShader.src", UB::VERTEX);
+    UB::Shader fgShader("shaders/one/fgShader.src", UB::FRAGMENT);
+
+    UB::ShaderProgram shaderProg;
+    shaderProg.createProgram(vxShader, fgShader);
+
+
+
+
+    unsigned int VBO, VAO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+
 
 
 
@@ -44,13 +73,17 @@ int main(){
         glClear(GL_COLOR_BUFFER_BIT);
 
 
-        
+        shaderProg.useProgram();
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
+    shaderProg.deleteShader(vxShader);
+    shaderProg.deleteShader(fgShader);
 
     glfwTerminate();
 

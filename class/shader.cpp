@@ -55,7 +55,7 @@ namespace UB
         { return typeShader; }
 
 
-    void ShaderProgram::CreateProgram(const Shader& vertex, const Shader& fragment){
+    void ShaderProgram::createProgram(const Shader& vertex, const Shader& fragment){
         shaderProgram = glCreateProgram();
         glAttachShader(shaderProgram, vertex.getTypeShader());
         glAttachShader(shaderProgram, fragment.getTypeShader());
@@ -69,50 +69,50 @@ namespace UB
     }
 
 
-    unsigned int ShaderProgram::ID()
+    unsigned int ShaderProgram::getID()
     {
         return shaderProgram;
     }
 
 
-    void ShaderProgram::UseProgram()
+    void ShaderProgram::useProgram()
         { glUseProgram(shaderProgram); }
 
 
-    void ShaderProgram::SetInt(const std::string& name, const int value){
+    void ShaderProgram::setInt(const std::string& name, const int value){
         glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
     }
 
 
-    void ShaderProgram::SetVec3(const std::string& name, const glm::vec3 &value){
+    void ShaderProgram::setVec3(const std::string& name, const glm::vec3 &value){
         glUniform3fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, &value[0]);
     }
 
 
-    void ShaderProgram::SetVec3(const std::string& uniVar, float x, float y, float z){
+    void ShaderProgram::setVec3(const std::string& uniVar, float x, float y, float z){
         glUniform3f(glGetUniformLocation(shaderProgram, uniVar.c_str()), x, y, z);
     }
-    void ShaderProgram::SetVec4(const std::string& uniVar, float x, float y, float z, float w){
+    void ShaderProgram::setVec4(const std::string& uniVar, float x, float y, float z, float w){
         glUniform4f(glGetUniformLocation(shaderProgram, uniVar.c_str()), x, y, z, w);
     }
 
 
-    void ShaderProgram::SetMat2(const std::string& uniVar, const glm::mat2 &mat){
+    void ShaderProgram::setMat2(const std::string& uniVar, const glm::mat2 &mat){
         glUniformMatrix2fv(glGetUniformLocation(shaderProgram, uniVar.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
 
 
-    void ShaderProgram::SetMat3(const std::string& uniVar, const glm::mat3 &mat){
+    void ShaderProgram::setMat3(const std::string& uniVar, const glm::mat3 &mat){
         glUniformMatrix2fv(glGetUniformLocation(shaderProgram, uniVar.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
 
 
-    void ShaderProgram::SetMat4(const std::string& uniVar, const glm::mat4 &mat){
+    void ShaderProgram::setMat4(const std::string& uniVar, const glm::mat4 &mat){
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, uniVar.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
 
 
-    void ShaderProgram::SetFloat(const std::string& uniVar, const float fVar){
+    void ShaderProgram::setFloat(const std::string& uniVar, const float fVar){
         glUniform1f(glGetUniformLocation(shaderProgram, uniVar.c_str()), fVar);
     }
 

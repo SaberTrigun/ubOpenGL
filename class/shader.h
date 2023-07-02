@@ -48,27 +48,27 @@ public:
     //ShaderProgram();
     //ShaderProgram(Shader& vertex, Shader& fragment);
 
-    void CreateProgram(const Shader& vertex, const Shader& fragment);
+    void createProgram(const Shader& vertex, const Shader& fragment);
 
-    unsigned int ID();
+    unsigned int getID();
 
-    void UseProgram();
+    void useProgram();
 
-    void SetInt(const std::string& name, const int value);
+    void setInt(const std::string& name, const int value);
 
-    void SetVec3(const std::string& name, const glm::vec3 &value);
+    void setVec3(const std::string& name, const glm::vec3 &value);
 
-    void SetVec3(const std::string& uniVar, float x, float y, float z);
+    void setVec3(const std::string& uniVar, float x, float y, float z);
 
-    void SetVec4(const std::string& uniVar, float x, float y, float z, float w);
+    void setVec4(const std::string& uniVar, float x, float y, float z, float w);
 
-    void SetMat2(const std::string& uniVar, const glm::mat2 &mat);
+    void setMat2(const std::string& uniVar, const glm::mat2 &mat);
 
-    void SetMat3(const std::string& uniVar, const glm::mat3 &mat);
+    void setMat3(const std::string& uniVar, const glm::mat3 &mat);
 
-    void SetMat4(const std::string& uniVar, const glm::mat4 &mat);
+    void setMat4(const std::string& uniVar, const glm::mat4 &mat);
 
-    void SetFloat(const std::string& uniVar, const float fVar);
+    void setFloat(const std::string& uniVar, const float fVar);
 
 };
 
