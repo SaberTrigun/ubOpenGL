@@ -4,7 +4,16 @@
 namespace UB
 {
 
-    Texture::Texture() : width(0), height(0), nrChannels(0), pathToFile(nullptr), data(nullptr)
+Texture::Texture() : width(0), height(0), nrChannels(0), data(nullptr)
+{}
+
+
+Texture::Texture(int _width, int _height, int _nrChannels, std::string _pathToFile, unsigned char* _data) :
+    , width(_width)
+    , height(_height)
+    , nrChannels(_nrChannels)
+    , pathToFile(_pathToFile)
+    , data(_data)
     {}
 
 

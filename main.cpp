@@ -44,6 +44,8 @@ int main(){
 
     UB::ShaderProgram shaderProg;
     shaderProg.createProgram(vxShader, fgShader);
+    shaderProg.deleteShader(vxShader);
+    shaderProg.deleteShader(fgShader);
 
 
 
@@ -72,18 +74,23 @@ int main(){
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-
         shaderProg.useProgram();
+
+        float time = glfwGetTime();
+        float redColor = sin(time) / 2.0f + 0.5f;
+        shaderProg.setVec4("uColor", redColor, 0.0f, 0.0f, 1.0f);
+
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
+
 
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    shaderProg.deleteShader(vxShader);
-    shaderProg.deleteShader(fgShader);
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
 
     glfwTerminate();
 
