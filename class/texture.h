@@ -3,6 +3,8 @@
 
 
 #include "../stb_image/stb_image.h"
+#include "../include/glad/glad.h"
+
 
 namespace UB
 {
@@ -16,32 +18,16 @@ private:
     int             height;
     int             nrChannels;
     unsigned char*  data;
-    std::string     pathToFile;
+    const char* const pathToFile;
 
 public:
 
-    Texture();
-    Texture(int _width, int _height, int _nrChannels, std::string _pathToFile, unsigned char* _data);
+    //Texture();
+    Texture(const char* const pathToFile);
 
-    void loadTextureFromFile(char* pathToFile);
+    void loadTextureFromFile(const char* const  pathToFile);
+
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

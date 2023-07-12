@@ -3,8 +3,8 @@ OBJ_DIR = obj
 UB_CLASS_DIR = class
 
 SOURCES = main.cpp glad.c
-SOURCES += $(UB_CLASS_DIR)/shader.cpp $(UB_CLASS_DIR)/camera.cpp
-##SOURCES += stb_image/stb_image.cpp
+SOURCES += $(UB_CLASS_DIR)/shader.cpp $(UB_CLASS_DIR)/camera.cpp $(UB_CLASS_DIR)/texture.cpp
+SOURCES += stb_image/stb_image.cpp
 
 OBJS_FILES = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
 
@@ -27,8 +27,8 @@ $(OBJ_DIR)/%.o:$(UB_CLASS_DIR)/%.cpp
 $(OBJ_DIR)/%.o:%.c
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-##$(OBJ_DIR)/%.o:stb_image/%.cpp
-##	$(CXX) $(CXXFLAGS) -c -o $@ $<
+$(OBJ_DIR)/%.o:stb_image/%.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(EXE)
 	$(shell $(RUN)) @echo Build complete for $(ECHO_MESSAGE)
