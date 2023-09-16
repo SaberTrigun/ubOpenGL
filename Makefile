@@ -9,7 +9,7 @@ SOURCES += stb_image/stb_image.cpp
 OBJS_FILES = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
 
 UNAME_S := $(shell uname -s)
-LINUX_GL_LIBS = -lglfw -lGL -ldl -lX11 -lpthread -lXrandr -lXi
+LINUX_GL_LIBS = -Llib/ -lglfw3 -lGL -ldl -lX11 -lpthread -lXrandr -lXi
 CXXFLAGS = -w
 RUN = ./$(EXE)
 
