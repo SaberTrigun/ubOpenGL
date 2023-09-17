@@ -23,9 +23,9 @@ private:
 public:
 
     //Texture();
-    Texture(const char* const pathToFile);
+    Texture(const char* const pathToFile, const unsigned int formatType);
 
-    void loadTextureFromFile(const char* const  pathToFile);
+    void loadTextureFromFile(const char* const  pathToFile, const unsigned int formatType);
 
 };
 

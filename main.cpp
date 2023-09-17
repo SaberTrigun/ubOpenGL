@@ -5,6 +5,8 @@
 #include "class/texture.h"
 //#include "class/camera.h"
 
+using namespace UB;
+
 int gHeight_scr = 1400;
 int gWidth_scr  = 800;
 
@@ -50,14 +52,13 @@ int main(){
         1, 2, 3};
 
 
-    UB::Shader vxShader("shaders/two/vxShader.src", UB::VERTEX);
-    UB::Shader fgShader("shaders/two/fgShader.src", UB::FRAGMENT);
+    Shader vxShader("shaders/three/vxShader.src", VERTEX);
+    Shader fgShader("shaders/three/fgShader.src", FRAGMENT);
 
-    UB::ShaderProgram shaderProg;
+    ShaderProgram shaderProg;
     shaderProg.createProgram(vxShader, fgShader);
     shaderProg.deleteShader(vxShader);
     shaderProg.deleteShader(fgShader);
-
 
 
 
@@ -84,13 +85,13 @@ int main(){
     glEnableVertexAttribArray(2);
 
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    //glBindBuffer(GL_ARRAY_BUFFER, 0);
+    //glBindVertexArray(0);
 
 
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    unsigned int textureBox;
+    glGenTextures(1, &textureBox);
+    glBindTexture(GL_TEXTURE_2D, textureBox);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -98,8 +99,25 @@ int main(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    UB::Texture textureBox("textures/box.jpg");
+    Texture loaderTextureBox("textures/box.jpg", GL_RGB);
 
+
+    unsigned int textureSmile;
+    glGenTextures(1, &textureSmile);
+    glBindTexture(GL_TEXTURE_2D, textureSmile);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    Texture loaderTextureSmile("textures/smile.png", GL_RGBA);
+
+
+    shaderProg.useProgram();
+    shaderProg.setInt("textureBox", 0);
+    shaderProg.setInt("textureSmile", 1);
 
 
     while(!glfwWindowShouldClose(window))
@@ -107,7 +125,10 @@ int main(){
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glBindTexture(GL_TEXTURE_2D, texture);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureBox);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, textureSmile);
 
         shaderProg.useProgram();
 
